@@ -1,5 +1,3 @@
-import { SystemState } from '../system/types';
-
 export interface User {
   email: string;
   userId: string;

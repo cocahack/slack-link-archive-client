@@ -7,18 +7,32 @@ import React, {
 } from 'react';
 
 import './auth.css';
-import { backendAxiosInstance as axios } from '../http';
-import { validateEmailInput } from '../util';
+import { backendAxiosInstance as axios } from '../../http';
+import { validateEmailInput } from '../../util';
+import { API_VERSION } from '../../constants';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { SystemState } from '../../store/system/types';
+import { useHistory } from 'react-router-dom';
 
 const Auth: FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const systemState = useSelector<RootState, SystemState>(
+    (state) => state.system,
+  );
+  const history = useHistory();
+
+  // redirect when the user logged in
+  if (systemState) {
+    history.push('/');
+  }
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
     if (validateEmailInput(email)) {
       axios
-        .post('register', { email })
+        .post(`/${API_VERSION}/auth/register`, { email })
         .then((res) => {
           setMessage('슬랙에서 초대 링크를 통해 접속해주세요.');
         })

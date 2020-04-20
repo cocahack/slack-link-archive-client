@@ -1,6 +1,6 @@
-import axios from 'axios';
+import Axios from 'axios';
 
-const backendAxiosInstance = axios.create({
+const axios = Axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080/dev'
@@ -9,6 +9,7 @@ const backendAxiosInstance = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
-export default backendAxiosInstance;
+export default axios;

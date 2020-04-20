@@ -1,8 +1,8 @@
-# Codesquad Link Archive
+# Slack Link Archive
 
-Link: https://cla.cocahack.me (currently disabled)
+Link: https://links.cocahack.me (currently disabled)
 
-Backend project - https://github.com/cocahack/codesquad-link-archive
+Backend project - https://github.com/cocahack/skack-link-archive
 
 ## Project Stack
 
