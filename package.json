@@ -18,12 +18,14 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.0",
     "throttle-debounce": "^2.1.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_ENV=development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
@@ -52,6 +54,8 @@
   "devDependencies": {
     "@types/qs": "^6.9.1",
     "@types/ramda": "^0.27.3",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router-dom": "^5.1.4",
     "@types/styled-components": "^5.0.1",
     "@types/throttle-debounce": "^2.1.0"
   }
