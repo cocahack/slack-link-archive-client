@@ -24,7 +24,7 @@ const Auth: FC = () => {
   const history = useHistory();
 
   // redirect when the user logged in
-  if (systemState) {
+  if (systemState.loggedIn) {
     history.push('/');
   }
 

@@ -5,16 +5,23 @@ import qs from 'qs';
 import BigSpinner from '../../UI/big-spinner';
 import axios from '../../http/backend/backend-axios';
 import { printError } from '../../util';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { SystemState } from '../../store/system/types';
 
 const Enter: FC<RouteProps> = (props) => {
   const history = useHistory();
+  const { location } = props;
+  const systemState = useSelector<RootState, SystemState>(state => state.system);
 
   useEffect(() => {
-    const { invitation } = qs.parse(props.location?.search || '', {
+    const { invitation } = qs.parse(location?.search || '', {
       ignoreQueryPrefix: true,
     });
 
-    if (invitation) {
+    if(systemState.loggedIn || !invitation) {
+      history.push('/register');
+    } else {
       axios
         .post('/v1/auth/enter', { invitation })
         .then((res) => {
@@ -22,10 +29,11 @@ const Enter: FC<RouteProps> = (props) => {
         })
         .catch((e) => {
           printError(e);
-          history.push('/redirect');
+          history.push('/register');
         });
     }
-  }, [history, props.location]);
+
+  }, [location, history, systemState]);
 
   return <BigSpinner />;
 };
