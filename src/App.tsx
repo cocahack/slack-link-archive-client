@@ -39,10 +39,10 @@ const App: FC<Props> = (props) => {
   const location = useLocation();
   const history = useHistory();
   const { setLoggedIn, system } = props;
-  const [ init, setInit ] = useState(false);
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
-    if (!system.loggedIn) {
+    if (!system.loggedIn && !init) {
       axios
         .post<LoginDto>(`/${API_VERSION}/auth/login`)
         .then((res) => {
@@ -51,7 +51,10 @@ const App: FC<Props> = (props) => {
         })
         .catch((e) => {
           printError(e);
-          if (!/^\/enter*/.test(location.pathname) && location.pathname !== '/register' ) {
+          if (
+            !/^\/enter*/.test(location.pathname) &&
+            location.pathname !== '/register'
+          ) {
             history.push('/register');
           }
         });
@@ -61,13 +64,16 @@ const App: FC<Props> = (props) => {
 
   return (
     <div>
-      { !setInit ? <BigSpinner /> : null }
-      <Switch>
-        <Route path={'/register'} component={Auth} />
-        <Route path={'/enter'} component={Enter} />
-        <Route path={'/'} exact render={() => <div>로그인 성공</div>} />
-        <Route render={() => <div>기본 라우터</div>} />
-      </Switch>
+      {!init ? (
+        <BigSpinner />
+      ) : (
+        <Switch>
+          <Route path={'/register'} component={Auth} />
+          <Route path={'/enter'} component={Enter} />
+          <Route path={'/'} exact render={() => <div>로그인 성공</div>} />
+          <Route render={() => <div>기본 라우터</div>} />
+        </Switch>
+      )}
     </div>
   );
 };
