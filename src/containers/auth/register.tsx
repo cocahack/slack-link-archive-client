@@ -15,7 +15,7 @@ import { RootState } from '../../store';
 import { SystemState } from '../../store/system/types';
 import { useHistory } from 'react-router-dom';
 
-const Auth: FC = () => {
+export const Register: FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const systemState = useSelector<RootState, SystemState>(
@@ -77,5 +77,3 @@ const Auth: FC = () => {
     </div>
   );
 };
-
-export default Auth;

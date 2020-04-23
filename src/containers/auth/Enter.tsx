@@ -8,22 +8,25 @@ import { printError } from '../../util';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { SystemState } from '../../store/system/types';
+import { API_VERSION } from '../../constants';
 
-const Enter: FC<RouteProps> = (props) => {
+export const Enter: FC<RouteProps> = (props) => {
   const history = useHistory();
   const { location } = props;
-  const systemState = useSelector<RootState, SystemState>(state => state.system);
+  const systemState = useSelector<RootState, SystemState>(
+    (state) => state.system,
+  );
 
   useEffect(() => {
     const { invitation } = qs.parse(location?.search || '', {
       ignoreQueryPrefix: true,
     });
 
-    if(systemState.loggedIn || !invitation) {
+    if (systemState.loggedIn || !invitation) {
       history.push('/register');
     } else {
       axios
-        .post('/v1/auth/enter', { invitation })
+        .post(`/${API_VERSION}/auth/enter`, { invitation })
         .then((res) => {
           history.push('/');
         })
@@ -32,10 +35,7 @@ const Enter: FC<RouteProps> = (props) => {
           history.push('/register');
         });
     }
-
   }, [location, history, systemState]);
 
   return <BigSpinner />;
 };
-
-export default Enter;
