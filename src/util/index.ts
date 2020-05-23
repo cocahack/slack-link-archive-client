@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const { NODE_ENV } = process.env;
 
 export type JwtPayload = {
@@ -21,3 +23,5 @@ export const printError = (e: Error) => {
     console.error(e);
   }
 };
+
+export const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');

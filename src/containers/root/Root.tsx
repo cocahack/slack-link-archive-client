@@ -1,14 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
-import { BrowserRouterProps, Redirect, useLocation } from 'react-router-dom';
-
-import axios from '../http/backend/backend-axios';
-import { API_VERSION } from '../constants';
-import { printError } from '../util';
-import { RootState } from '../store';
-import { User } from '../store/user/types';
-import { login } from '../store/system/actions';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import BigSpinner from '../UI/big-spinner';
+import { BrowserRouterProps, Redirect, useLocation } from 'react-router-dom';
+import { API_VERSION } from '../../constants';
+import axios from '../../http/backend/backend-axios';
+import { RootState } from '../../store';
+import { login } from '../../store/system/actions';
+import { User } from '../../store/user/types';
+import BigSpinner from '../../UI/big-spinner';
+import { printError } from '../../util';
+import { CardList } from './CardList/CardList';
+
 
 const mapState = (state: RootState) => ({ system: state.system });
 
@@ -60,7 +61,17 @@ const Root: FC<Props> = (props) => {
     return <Redirect to={dest} />;
   }
 
-  return <div>{isInitialized ? <div>로그인 성공</div> : <BigSpinner />}</div>;
+  return (
+    <div>
+      {isInitialized ? (
+        <Fragment>
+          <CardList />
+        </Fragment>
+      ) : (
+        <BigSpinner />
+      )}
+    </div>
+  );
 };
 
 export default connector(Root);
