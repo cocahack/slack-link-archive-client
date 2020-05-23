@@ -27,7 +27,7 @@ export const CardList: FC = () => {
   const [links, setLinks] = useState<Link[]>([]);
   const [userMap, setUserMap] = useState<Map<string, User> | null>(null);
   const [channelMap, setChannelMap] = useState<Map<string, any> | null>(null);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   // const [date, setDate] = useState(yesterday);
 
   const classes = useStyles();
