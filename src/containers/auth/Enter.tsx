@@ -1,14 +1,14 @@
-import React, { FC, useEffect } from 'react';
-import { RouteProps, useHistory } from 'react-router-dom';
 import qs from 'qs';
-
-import BigSpinner from '../../UI/big-spinner';
-import axios from '../../http/backend/backend-axios';
-import { printError } from '../../util';
+import React, { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { RouteProps, useHistory } from 'react-router-dom';
+import { API_VERSION } from '../../constants';
+import axios from '../../http/backend/backend-axios';
 import { RootState } from '../../store';
 import { SystemState } from '../../store/system/types';
-import { API_VERSION } from '../../constants';
+import BigSpinner from '../../UI/big-spinner';
+import { printError } from '../../util';
+
 
 export const Enter: FC<RouteProps> = (props) => {
   const history = useHistory();
@@ -18,15 +18,15 @@ export const Enter: FC<RouteProps> = (props) => {
   );
 
   useEffect(() => {
-    const { invitation } = qs.parse(location?.search || '', {
+    const { code } = qs.parse(location?.search || '', {
       ignoreQueryPrefix: true,
     });
 
-    if (systemState.loggedIn || !invitation) {
+    if (systemState.loggedIn || !code) {
       history.push('/register');
     } else {
       axios
-        .post(`/${API_VERSION}/auth/enter`, { invitation })
+        .post(`/${API_VERSION}/auth/entrance`, { code })
         .then((res) => {
           history.push('/');
         })

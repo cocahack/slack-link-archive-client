@@ -3,7 +3,7 @@ import Axios from 'axios';
 const axios = Axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8080/dev'
+      ? 'http://localhost:4000'
       : 'https://links-v1.cocahack.me',
   headers: {
     Accept: 'application/json',
