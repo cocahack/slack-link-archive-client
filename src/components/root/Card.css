@@ -1,0 +1,49 @@
+.Card-Frame {
+    width: 30rem;
+    margin: 2rem auto;
+    max-width: 80%;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.Card-Frame img {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.Card-Frame label,
+.Card-Frame input {
+    display: block;
+    width: 100%;
+}
+
+.Card-Frame input {
+    font: inherit;
+    padding: 0.1rem 0.25rem;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.Card-Frame input:focus {
+    outline: none;
+    border-bottom-color: forestgreen;
+}
+
+.Card-Frame__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    background: forestgreen;
+    padding: 0.5rem 2rem;
+    color: white;
+    border: 1px solid forestgreen;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
